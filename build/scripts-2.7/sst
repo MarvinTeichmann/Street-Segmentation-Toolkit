@@ -1,0 +1,113 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+"""Street Segmentation Tools"""
+
+
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+import logging
+import sys
+
+logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
+                    level=logging.DEBUG,
+                    stream=sys.stdout)
+
+# sst modules
+import sst
+from sst import selfcheck
+from sst import create_database
+from sst import test
+from sst import train
+from sst import eval_image
+from sst import serve
+from sst import view
+from sst import video
+
+# Every sst tool that should be available through
+#   sst TOOL
+# has to be added to ``get_parser()`` and to ``main``.
+
+
+def get_parser():
+    """Return the parser object for this script."""
+    parser = ArgumentParser(description=__doc__,
+                            formatter_class=ArgumentDefaultsHelpFormatter,
+                            prog='sst')
+    subparsers = parser.add_subparsers(dest='cmd')
+    subparsers.add_parser('selfcheck',
+                          add_help=False,
+                          help="Self-check of the sst toolkit.")
+    parser.add_argument('--version',
+                        action='version',
+                        version=('sst %s' % str(sst.__version__)))
+    subparsers.add_parser('create_database',
+                          add_help=False,
+                          parents=[create_database.get_parser()],
+                          help=("Create database for training."))
+    subparsers.add_parser('eval',
+                          add_help=False,
+                          parents=[eval_image.get_parser()],
+                          formatter_class=ArgumentDefaultsHelpFormatter,
+                          help=("Evaluate a single image"))
+    subparsers.add_parser('test',
+                          add_help=False,
+                          parents=[test.get_parser()],
+                          help=("Test a classifier and get its accuracy."))
+    subparsers.add_parser('train',
+                          add_help=False,
+                          parents=[train.get_parser()],
+                          formatter_class=ArgumentDefaultsHelpFormatter,
+                          help=("Train a new model."))
+    subparsers.add_parser('serve',
+                          add_help=False,
+                          parents=[serve.get_parser()],
+                          formatter_class=ArgumentDefaultsHelpFormatter,
+                          help=("Start a web server to listen for "
+                                "classification tasks"))
+    subparsers.add_parser('view',
+                          add_help=False,
+                          parents=[view.get_parser()],
+                          formatter_class=ArgumentDefaultsHelpFormatter,
+                          help=("Show a model"))
+    subparsers.add_parser('video',
+                          add_help=False,
+                          parents=[video.get_parser()],
+                          formatter_class=ArgumentDefaultsHelpFormatter,
+                          help=("Create a video"))
+    return parser
+
+
+def main(args):
+    if args.cmd == 'selfcheck':
+        selfcheck.main()
+    elif args.cmd == 'create_database':
+        create_database.main(network_path=args.network,
+                             stride=args.stride,
+                             image_batch_size=args.batchsize)
+    elif args.cmd == 'eval':
+        eval_image.main(image_path=args.image_path,
+                        output_path=args.output_path,
+                        model_path_trained=args.model_path_trained,
+                        stride=args.stride)
+    elif args.cmd == 'test':
+        test.main(args.model_path_trained,
+                  args.stride)
+    elif args.cmd == 'train':
+        train.main(network_path=args.network,
+                   stride=args.stride,
+                   image_batch_size=args.batchsize)
+    elif args.cmd == 'serve':
+        serve.main(args.port, args.model_path_trained)
+    elif args.cmd == 'view':
+        view.main(args.model_path)
+    elif args.cmd == 'video':
+        video.main(args.model_path_trained,
+                   args.photo_dir,
+                   args.video_dir,
+                   args.stride)
+    else:
+        logging.info('No such tool.')
+
+if __name__ == '__main__':
+    args = get_parser().parse_args()
+    main(args)

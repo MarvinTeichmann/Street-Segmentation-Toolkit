@@ -1,0 +1,59 @@
+{% extends "bootstrap/base.html" %}
+{% block heading %}Classify{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="page-header"><h1>Classified</h1></div>
+
+    <h2>Result</h2>
+    <img src="{{output_path}}" />
+    <img src="{{output_overlay_path}}" />
+
+    <h2>Diagnostics</h2>
+    <p>Execution time: {{'%0.2f'| format(execution_time|float)}}s</p>
+    <p>Overlay time: {{'%0.2f'| format(overlay_time|float)}}s</p>
+
+    <h2>Request</h2>
+    <form method="GET" action="work">
+      <div class="form-group">
+        <label for="photo_path">photo_path</label>
+        <input type="text" class="form-control"
+               id="photo_path" name="photo_path"
+               placeholder="/fzi/ids/thoma/thoma_no_backup/team-segmentation/data/roadC1200x375/image/um_000000.png"
+               value="{{photo_path}}"
+               list="paths" />
+        <datalist id="paths">
+            <option value="/fzi/ids/thoma/thoma_no_backup/team-segmentation/data/roadC1200x375/image/um_000000.png">
+            <option value="/disk/no_backup/mlprak1/data/team_segmentation/data_road/roadC621/image_2/umm_000000.png">
+            <option value="/disk/no_backup/mlprak1/data/team_segmentation/data_road/roadC621/image_2/uu_000000.png">
+        </datalist>
+      </div>
+      <div class="form-group">
+        <label for="stride">stride</label>
+        <input type="number" class="form-control"
+               id="stride"  name="stride"
+               placeholder="10"
+               value="{{stride}}"/>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"
+                 id="hard_classification"
+                 name="hard_classification"
+                 value="1"
+                 {% if hard_classification %}checked="checked"{%else%}{% endif %}/> Harte Klassifizierung
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="patch_size">patch_size</label>
+        <input type="number" class="form-control disabled"
+               id="patch_size" name="patch_size"
+               placeholder="10"
+               value="{{patch_size}}"
+               disabled />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

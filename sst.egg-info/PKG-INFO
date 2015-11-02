@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: sst
+Version: 0.1.0
+Summary: Street Segmentation Tools
+Home-page: UNKNOWN
+Author: Martin Thoma, Marvin Teichman, Sebastian Bittel, Vitali Kaiser
+Author-email: info@martin-thoma.de
+License: UNKNOWN
+Description: This package contains multiple tools which can be used to classify the pixels of a given image into 'street'/'no street'.
+Keywords: autonomous driving,cognition
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Software Development
+Classifier: Topic :: Utilities

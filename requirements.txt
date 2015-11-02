@@ -1,0 +1,6 @@
+flask
+flask_bootstrap
+nose
+nose-cov
+numpydoc
+sphinx_rtd_theme
