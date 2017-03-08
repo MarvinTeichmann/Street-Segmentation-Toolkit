@@ -1,7 +1,7 @@
 Street Segmentation Toolkit
 ===========================
 
-This is a collection of tools for pixel-wise street segmentation.
+This is a collection of tools for pixel-wise street segmentation. Please also consider checking out [KittiSeg](https://github.com/MarvinTeichmann/KittiSeg#kittiseg), a state-of-the art realtime segmentation toolkit.
 
 
 Installation
@@ -32,7 +32,7 @@ Now you should be able to execute `sst --help`.
 
 # KittiSeg
 
-Please also check out the [KittiSeg](https://github.com/MarvinTeichmann/KittiSeg) project. It implements similar functionality but which a much higher segmentation accuracy.
+Please also check out the [KittiSeg](https://github.com/MarvinTeichmann/KittiSeg#kittiseg) project. It implements similar functionality but which a much higher segmentation accuracy.
 
 
 
