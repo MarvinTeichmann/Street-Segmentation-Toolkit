@@ -30,3 +30,9 @@ Make sure that ~/.local/bin is in your PATH.
 
 Now you should be able to execute `sst --help`.
 
+# KittiSeg
+
+Please also check out the [KittiSeg](https://github.com/MarvinTeichmann/KittiSeg) project. It implements similar functionality but which a much higher segmentation accuracy.
+
+
+
